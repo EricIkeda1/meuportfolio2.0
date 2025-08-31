@@ -1,24 +1,122 @@
 .footer {
-  background-color: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   color: var(--light-text);
   text-align: center;
-  padding: 2rem 0;
+  padding: 3rem 0 1.5rem;
   margin-top: 4rem;
+}
+
+.footer h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #ffd43b;
+}
+
+.footer p {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
 }
 
 .socialLinks {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
-  margin: 1rem 0;
+  gap: 2rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
 }
 
-.socialLinks a {
+.socialLink {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   color: var(--light-text);
-  font-size: 1.5rem;
+  text-decoration: none;
   transition: var(--transition);
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  background: rgba(255, 255, 255, 0.1);
+  min-width: 80px;
 }
 
-.socialLinks a:hover {
+.socialLink:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.2);
   color: #ffd43b;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.socialLink i {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.socialText {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.footerInfo {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.madeWith {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.heart {
+  color: #ff6b6b;
+  animation: heartbeat 2s infinite;
+}
+
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  5% { transform: scale(1.1); }
+  10% { transform: scale(1); }
+  15% { transform: scale(1.1); }
+  20% { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+
+@media (max-width: 768px) {
+  .socialLinks {
+    gap: 1rem;
+  }
+  
+  .socialLink {
+    min-width: 70px;
+    padding: 0.8rem;
+  }
+  
+  .socialLink i {
+    font-size: 1.5rem;
+  }
+  
+  .socialText {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .socialLinks {
+    gap: 0.5rem;
+  }
+  
+  .socialLink {
+    min-width: 60px;
+    padding: 0.6rem;
+  }
+  
+  .socialLink i {
+    font-size: 1.2rem;
+  }
+  
+  .socialText {
+    font-size: 0.7rem;
+  }
 }
