@@ -1,0 +1,62 @@
+:root {
+  --primary-color: #2563eb;
+  --secondary-color: #1e40af;
+  --accent-color: #3b82f6;
+  --text-color: #1f2937;
+  --light-text: #f8fafc;
+  --background: #ffffff;
+  --card-bg: #f1f5f9;
+  --dark-card-bg: #334155;
+  --transition: all 0.3s ease;
+  --border-radius: 8px;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode {
+  --primary-color: #3b82f6;
+  --secondary-color: #2563eb;
+  --text-color: #f1f5f9;
+  --light-text: #f8fafc;
+  --background: #1e293b;
+  --card-bg: #334155;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-color);
+  transition: var(--transition);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.typescript-badge {
+  display: inline-block;
+  background-color: #3178c6;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+      font-size: 2.2rem;
+  }
+
+  .hero p {
+      font-size: 1rem;
+  }
+}

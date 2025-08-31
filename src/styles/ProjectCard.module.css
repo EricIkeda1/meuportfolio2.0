@@ -1,0 +1,80 @@
+.projectCard {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+
+.projectCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.projectImg {
+  height: 200px;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 3rem;
+}
+
+.projectContent {
+  padding: 1.5rem;
+}
+
+.projectContent h3 {
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.projectYear {
+  color: var(--secondary-color);
+  font-weight: 500;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.projectContent p {
+  margin-bottom: 1rem;
+}
+
+.projectTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.projectTag {
+  background-color: var(--primary-color);
+  color: var(--light-text);
+  padding: 0.3rem 0.8rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+}
+
+.projectLinks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+.projectLink {
+  display: inline-flex;
+  align-items: center;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.projectLink:hover {
+  color: var(--secondary-color);
+}
+
+.projectLink i {
+  margin-right: 0.5rem;
+}
