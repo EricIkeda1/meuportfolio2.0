@@ -8,7 +8,6 @@ const Footer: React.FC = () => {
     <footer id="contact" className={styles.footer}>
       <div className="container">
         <h3>Entre em Contato</h3>
-        <p>Estou disponível para oportunidades e colaborações em projetos TypeScript e desenvolvimento full-stack.</p>
         
         <div className={styles.socialLinks}>
           <a 
