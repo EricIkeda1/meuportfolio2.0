@@ -19,13 +19,13 @@ const Header: React.FC<HeaderProps> = ({ toggleTheme, isDarkMode }) => {
       <div className="container">
         <nav className={styles.nav}>
           <div className={styles.logo}>
-            <i className="fab fa-typescript"></i>
+            <i className="fab fa-react"></i>
             <span>EIPortfolio</span>
           </div>
           <ul className={styles.navLinks}>
-            <li><a href="#home" onClick={() => scrollToSection('home')}>Início</a></li>
-            <li><a href="#projects" onClick={() => scrollToSection('projects')}>Projetos</a></li>
-            <li><a href="#contact" onClick={() => scrollToSection('contact')}>Contato</a></li>
+            <li><a onClick={() => scrollToSection('home')}>Início</a></li>
+            <li><a onClick={() => scrollToSection('projects')}>Projetos</a></li>
+            <li><a onClick={() => scrollToSection('contact')}>Contato</a></li>
           </ul>
           <button className={styles.themeToggle} onClick={toggleTheme}>
             <i className={isDarkMode ? 'fas fa-sun' : 'fas fa-moon'}></i>
