@@ -4,7 +4,7 @@ export const projectsData: Project[] = [
   {
     id: 1,
     title: "X4Glass - Rastreabilidade na Produção de Vidros",
-    year: "2025",
+    year: "2024",
     description: "Desenvolvido em equipe, este projeto teve como objetivo criar um sistema de rastreabilidade industrial para a Temperlândia, abordando o controle do fluxo de produção, monitoramento de ordens de serviço e visualização de dados em tempo real.",
     tags: ["HTML", "CSS", "JavaScript", "SQLite3", "Python", "Django"],
     githubUrl: "https://github.com/EricIkeda1/X4Glass.git",
@@ -67,7 +67,7 @@ export const projectsData: Project[] = [
   {
     id: 8,
     title: "Temperlights Mobile",
-    year: "2024",
+    year: "2025",
     description: "Aplicativo móvel desenvolvido para o sistema de rastreabilidade da Temperlândia. Desenvolvido com React Native, oferece funcionalidades de acompanhamento de produção em tempo real para dispositivos móveis.",
     tags: ["Dart", "Flutter", "Mobile", "Supabase API"],
     githubUrl: "https://github.com/EricIkeda1/Temperlights-Mobile.git",
