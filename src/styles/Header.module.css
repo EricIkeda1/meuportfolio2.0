@@ -29,6 +29,8 @@
 .navLinks {
   display: flex;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .navLinks li {
@@ -60,16 +62,83 @@
   width: 100%;
 }
 
-.themeToggle {
+.navActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.themeToggle, .searchToggle {
   background: none;
   border: none;
   color: var(--light-text);
   cursor: pointer;
   font-size: 1.2rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.themeToggle:hover, .searchToggle:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.searchForm {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 25px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  width: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.searchForm.active {
+  width: 200px; 
+  opacity: 1;
+  visibility: visible;
+}
+
+.searchInput {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  color: var(--light-text);
+  font-size: 1rem;
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.searchSubmit {
+  background: transparent;
+  border: none;
+  padding: 0 0.75rem;
+  color: var(--light-text);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.searchSubmit:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
 }
 
 @media (max-width: 768px) {
   .navLinks {
-      display: none;
+    display: none;
+  }
+
+  .searchForm.active {
+    width: 150px;
   }
 }
