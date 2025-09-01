@@ -1,8 +1,20 @@
 import React from 'react';
 import styles from '../styles/Footer.module.css';
+import { useAchievements } from '../context/AchievementContext';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
+  const { incrementProgress } = useAchievements();
+
+  const trackSocialClick = (achievementId: string) => {
+    incrementProgress(achievementId);
+    incrementProgress('social_butterfly');
+  };
+
+  const handleLinkClick = (url: string, achievementId: string) => {
+    trackSocialClick(achievementId);
+    window.open(url, '_blank');
+  };
 
   return (
     <footer id="contact" className={styles.footer}>
@@ -10,43 +22,33 @@ const Footer: React.FC = () => {
         <h3>Entre em Contato</h3>
         
         <div className={styles.socialLinks}>
-          <a 
-            href="https://github.com/EricIkeda1" 
-            target="_blank" 
-            rel="noopener noreferrer"
+          <button 
             className={styles.socialLink}
-            aria-label="Visite meu GitHub"
+            onClick={() => handleLinkClick('https://github.com/EricIkeda1', 'visit_github')}
           >
             <i className="fab fa-github"></i>
             <span className={styles.socialText}>GitHub</span>
-          </a>
+          </button>
 
-          <a 
-            href="https://www.linkedin.com/in/eric-ikeda/" 
-            target="_blank" 
-            rel="noopener noreferrer"
+          <button 
             className={styles.socialLink}
-            aria-label="Visite meu LinkedIn"
+            onClick={() => handleLinkClick('https://www.linkedin.com/in/eric-ikeda/', 'visit_linkedin')}
           >
             <i className="fab fa-linkedin"></i>
             <span className={styles.socialText}>LinkedIn</span>
-          </a>
+          </button>
 
-          <a 
-            href="https://ericikedablogportfolio.vercel.app/" 
-            target="_blank" 
-            rel="noopener noreferrer"
+          <button 
             className={styles.socialLink}
-            aria-label="Visite meu Portfolio"
+            onClick={() => handleLinkClick('https://ericikedablogportfolio.vercel.app/', 'visit_portfolio')}
           >
             <i className="fas fa-briefcase"></i>
             <span className={styles.socialText}>Portfolio</span>
-          </a>
+          </button>
 
           <a 
             href="mailto:seu-email@exemplo.com" 
             className={styles.socialLink}
-            aria-label="Envie-me um e-mail"
           >
             <i className="fas fa-envelope"></i>
             <span className={styles.socialText}>E-mail</span>
@@ -55,9 +57,7 @@ const Footer: React.FC = () => {
 
         <div className={styles.footerInfo}>
           <p>© {currentYear} Eric Ikeda. Todos os direitos reservados.</p>
-          <p className={styles.madeWith}>
-            Desenvolvido usando React + TypeScript
-          </p>
+          <p className={styles.madeWith}>Desenvolvido usando React + TypeScript</p>
         </div>
       </div>
     </footer>

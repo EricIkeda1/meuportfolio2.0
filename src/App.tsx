@@ -4,6 +4,8 @@ import Hero from './components/Hero';
 import ProjectsGrid from './components/ProjectsGrid';
 import Footer from './components/Footer';
 import { projectsData } from './data/projects'; 
+import { AchievementProvider } from './context/AchievementContext';
+import AchievementSystem from './components/AchievementSystem';
 import './styles/globals.css';
 
 const App: React.FC = () => {
@@ -24,12 +26,15 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="App">
-      <Header toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
-      <Hero />
-      <ProjectsGrid projects={projectsData} /> 
-      <Footer />
-    </div>
+    <AchievementProvider>
+      <div className="App">
+        <Header toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
+        <Hero />
+        <ProjectsGrid projects={projectsData} /> 
+        <Footer />
+        <AchievementSystem />
+      </div>
+    </AchievementProvider>
   );
 };
 

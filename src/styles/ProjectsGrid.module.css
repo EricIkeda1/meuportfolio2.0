@@ -64,7 +64,6 @@
   background-color: var(--secondary-color);
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
   .filters {
     justify-content: center;

@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from '../styles/Header.module.css';
+import { useAchievements } from '../context/AchievementContext';
 
 interface HeaderProps {
   toggleTheme: () => void;
@@ -7,11 +8,18 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ toggleTheme, isDarkMode }) => {
+  const { unlockAchievement } = useAchievements();
+
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const handleThemeToggle = () => {
+    toggleTheme();
+    unlockAchievement('theme_switcher');
   };
 
   return (
@@ -27,7 +35,7 @@ const Header: React.FC<HeaderProps> = ({ toggleTheme, isDarkMode }) => {
             <li><a onClick={() => scrollToSection('projects')}>Projetos</a></li>
             <li><a onClick={() => scrollToSection('contact')}>Contato</a></li>
           </ul>
-          <button className={styles.themeToggle} onClick={toggleTheme}>
+          <button className={styles.themeToggle} onClick={handleThemeToggle}>
             <i className={isDarkMode ? 'fas fa-sun' : 'fas fa-moon'}></i>
           </button>
         </nav>

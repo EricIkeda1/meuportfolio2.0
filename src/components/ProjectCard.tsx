@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Project } from '../types';
+import { useAchievements } from '../context/AchievementContext';
 import styles from '../styles/ProjectCard.module.css';
 
 interface ProjectCardProps {
@@ -7,8 +8,18 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+  const { incrementProgress } = useAchievements();
+
+  const handleProjectClick = () => {
+    incrementProgress('project_clicker');
+  };
+
+  const handleLinkClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
+
   return (
-    <div className={styles.projectCard}>
+    <div className={styles.projectCard} onClick={handleProjectClick}>
       <div className={styles.projectImg}>
         <i className={project.icon}></i>
       </div>
@@ -23,12 +34,24 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         </div>
         <div className={styles.projectLinks}>
           {project.githubUrl && (
-            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className={styles.projectLink}>
+            <a 
+              href={project.githubUrl} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className={styles.projectLink}
+              onClick={handleLinkClick}
+            >
               <i className="fab fa-github"></i> Ver Repositório
             </a>
           )}
           {project.externalUrl && (
-            <a href={project.externalUrl} target="_blank" rel="noopener noreferrer" className={styles.projectLink}>
+            <a 
+              href={project.externalUrl} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className={styles.projectLink}
+              onClick={handleLinkClick}
+            >
               <i className="fas fa-external-link-alt"></i> Acessar o Site
             </a>
           )}
