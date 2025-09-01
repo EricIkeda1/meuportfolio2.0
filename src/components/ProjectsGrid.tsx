@@ -14,7 +14,7 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ projects }) => {
 
   const sortedProjects = useMemo(() => {
     return [...projects].sort((a, b) => {
-      return parseInt(b.year) - parseInt(a.year); 
+      return parseInt(b.year) - parseInt(a.year);
     });
   }, [projects]);
 
@@ -29,30 +29,40 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ projects }) => {
           return project.tags.some(tag => 
             ['HTML', 'CSS', 'JavaScript', 'React.js', 'React Native'].includes(tag)
           );
+        
         case 'Back-end':
-          return project.tags.some(tag => 
+          const hasBackend = project.tags.some(tag => 
             ['Python', 'Django', 'SQLite3'].includes(tag)
           );
+          const isSecurity = project.tags.some(tag =>
+            ['Criptografia', 'Segurança', 'AES', 'Diffie-Hellman'].includes(tag)
+          );
+          return hasBackend && !isSecurity;
+        
         case 'Full-stack':
           const hasFrontend = project.tags.some(tag => 
             ['HTML', 'CSS', 'JavaScript', 'React.js', 'React Native'].includes(tag)
           );
-          const hasBackend = project.tags.some(tag => 
+          const hasBackendFull = project.tags.some(tag => 
             ['Python', 'Django', 'SQLite3'].includes(tag)
           );
-          return hasFrontend && hasBackend;
+          return hasFrontend && hasBackendFull;
+        
         case 'Segurança':
           return project.tags.some(tag => 
             ['Criptografia', 'Segurança', 'AES', 'Diffie-Hellman'].includes(tag)
           );
+        
         case 'Mobile':
           return project.tags.some(tag => 
             ['React Native', 'Mobile'].includes(tag)
           );
+        
         case 'Pesquisa':
           return project.tags.some(tag => 
             ['Pesquisa', 'Acadêmico', 'Normas ABNT'].includes(tag)
           );
+        
         default:
           return true;
       }
