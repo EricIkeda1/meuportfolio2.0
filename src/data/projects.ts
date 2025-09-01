@@ -68,7 +68,7 @@ export const projectsData: Project[] = [
     id: 8,
     title: "Temperlights Mobile",
     year: "2025",
-    description: "Aplicativo móvel desenvolvido para o sistema de rastreabilidade da Temperlândia. Desenvolvido com React Native, oferece funcionalidades de acompanhamento de produção em tempo real para dispositivos móveis.",
+    description: "Aplicativo móvel desenvolvido para o sistema de rastreabilidade da Temperlândia. Desenvolvido com Dart e Flutter, oferece funcionalidades de acompanhamento de produção em tempo real para dispositivos móveis.",
     tags: ["Dart", "Flutter", "Mobile", "Supabase API"],
     githubUrl: "https://github.com/EricIkeda1/Temperlights-Mobile.git",
     icon: "fas fa-mobile-alt"
