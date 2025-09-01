@@ -32,7 +32,7 @@ const Header: React.FC<HeaderProps> = ({ toggleTheme, isDarkMode }) => {
         <nav className={styles.nav}>
           <div className={styles.logo}>
             <i className="fab fa-typescript"></i>
-            <span>TS Portfolio</span>
+            <span>EIPortfolio</span>
           </div>
 
           <ul className={styles.navLinks}>
