@@ -8,11 +8,13 @@ interface Achievement {
   unlocked: boolean;
   progress: number;
   maxProgress: number;
+  hidden?: boolean;
 }
 
 interface AchievementContextType {
   achievements: Achievement[];
   unlockAchievement: (id: string) => void;
+  updateProgress: (id: string, progress: number) => void;
   incrementProgress: (id: string, amount?: number) => void;
   totalAchievements: number;
   unlockedAchievements: number;
@@ -34,6 +36,7 @@ interface AchievementProviderProps {
 
 export const AchievementProvider: React.FC<AchievementProviderProps> = ({ children }) => {
   const [achievements, setAchievements] = useState<Achievement[]>([]);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   const initialAchievements: Achievement[] = [
     {
@@ -120,78 +123,157 @@ export const AchievementProvider: React.FC<AchievementProviderProps> = ({ childr
   ];
 
   useEffect(() => {
+    console.log('🎯 Conquistas atualizadas:', achievements);
+    console.log('📊 Total de conquistas:', achievements.length);
+  }, [achievements]);
+
+  useEffect(() => {
+    console.log('🔄 Carregando conquistas do localStorage...');
     const saved = localStorage.getItem('portfolio_achievements');
+    
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        setAchievements(parsed);
-      } catch {
+        console.log('📦 Conquistas carregadas do localStorage:', parsed);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setAchievements(parsed);
+        } else {
+          console.log('⚠️ Dados inválidos no localStorage, usando conquistas iniciais');
+          setAchievements(initialAchievements);
+        }
+      } catch (error) {
+        console.error('❌ Erro ao carregar conquistas:', error);
         setAchievements(initialAchievements);
       }
     } else {
+      console.log('📝 Criando conquistas iniciais');
       setAchievements(initialAchievements);
     }
+    setIsInitialized(true);
   }, []);
 
   useEffect(() => {
-    if (achievements.length > 0) {
+    if (isInitialized && achievements.length > 0) {
+      console.log('💾 Salvando conquistas no localStorage:', achievements);
       localStorage.setItem('portfolio_achievements', JSON.stringify(achievements));
     }
-  }, [achievements]);
+  }, [achievements, isInitialized]);
 
   const unlockAchievement = (id: string) => {
-    setAchievements(prev => prev.map(ach => 
-      ach.id === id ? { ...ach, unlocked: true, progress: ach.maxProgress } : ach
-    ));
+    console.log('🔓 Desbloqueando conquista:', id);
+    setAchievements(prev => {
+      const updated = prev.map(ach => 
+        ach.id === id ? { ...ach, unlocked: true, progress: ach.maxProgress } : ach
+      );
+      console.log('✅ Conquista desbloqueada. Novo estado:', updated);
+      return updated;
+    });
   };
 
-  const incrementProgress = (id: string, amount: number = 1) => {
-    setAchievements(prev => prev.map(ach => {
-      if (ach.id === id) {
-        const newProgress = Math.min(ach.maxProgress, ach.progress + amount);
-        const unlocked = newProgress >= ach.maxProgress;
-        return { ...ach, progress: newProgress, unlocked };
-      }
-      return ach;
-    }));
-  };
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setAchievements(prev => prev.map(ach => {
-        if (ach.id === 'read_about' && !ach.unlocked) {
-          const newProgress = ach.progress + 1;
+  const updateProgress = (id: string, progress: number) => {
+    console.log('📊 Atualizando progresso:', id, progress);
+    setAchievements(prev => {
+      const updated = prev.map(ach => {
+        if (ach.id === id) {
+          const newProgress = Math.min(ach.maxProgress, Math.max(0, progress));
           const unlocked = newProgress >= ach.maxProgress;
+          console.log('➡️ Novo progresso para', id, ':', newProgress, '/', ach.maxProgress, 'Desbloqueado:', unlocked);
           return { ...ach, progress: newProgress, unlocked };
         }
         return ach;
-      }));
-    }, 1000);
+      });
+      console.log('✅ Progresso atualizado. Novo estado:', updated);
+      return updated;
+    });
+  };
 
-    return () => clearInterval(interval);
-  }, []);
+  const incrementProgress = (id: string, amount: number = 1) => {
+    console.log('➕ Incrementando progresso:', id, 'Valor:', amount);
+    setAchievements(prev => {
+      const updated = prev.map(ach => {
+        if (ach.id === id) {
+          const newProgress = Math.min(ach.maxProgress, ach.progress + amount);
+          const unlocked = newProgress >= ach.maxProgress;
+          console.log('📈 Progresso atualizado para', id, ':', newProgress, '/', ach.maxProgress, 'Desbloqueado:', unlocked);
+          return { ...ach, progress: newProgress, unlocked };
+        }
+        return ach;
+      });
+      console.log('✅ Progresso incrementado. Novo estado:', updated);
+      return updated;
+    });
+  };
 
   useEffect(() => {
+    if (!isInitialized || achievements.length === 0) {
+      console.log('⏰ Timer: Aguardando inicialização...');
+      return;
+    }
+
+    console.log('⏰ Iniciando timer de 30 segundos...');
+    let seconds = 0;
+    const interval = setInterval(() => {
+      seconds++;
+      console.log('⏳ Timer:', seconds, 'segundos');
+      updateProgress('read_about', seconds);
+      
+      if (seconds % 5 === 0) {
+        console.log('⏰ Progresso do tempo:', seconds + '/30 segundos');
+      }
+    }, 1000);
+
+    return () => {
+      console.log('⏰ Parando timer...');
+      clearInterval(interval);
+    };
+  }, [isInitialized, achievements]); 
+
+  useEffect(() => {
+    if (!isInitialized || achievements.length === 0) {
+      console.log('📜 Scroll detector: Aguardando inicialização...');
+      return;
+    }
+
+    console.log('📜 Configurando detector de scroll...');
     const handleScroll = () => {
-      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-      const scrolled = window.scrollY;
+      const scrollHeight = document.documentElement.scrollHeight;
+      const clientHeight = window.innerHeight;
+      const scrollTop = window.scrollY;
+      
+      const scrollable = scrollHeight - clientHeight;
+      const scrolled = scrollTop;
+      const scrollPercentage = scrollable > 0 ? (scrolled / scrollable) * 100 : 0;
+      
+      console.log('📜 Scroll:', Math.round(scrollPercentage) + '%');
       
       if (scrollable > 0 && scrolled / scrollable > 0.9) {
+        console.log('🎯 Scroll até o final detectado! Desbloqueando conquista...');
         unlockAchievement('scroll_explorer');
         window.removeEventListener('scroll', handleScroll);
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      console.log('📜 Removendo detector de scroll...');
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isInitialized, achievements]); 
 
   const totalAchievements = achievements.length;
   const unlockedAchievements = achievements.filter(a => a.unlocked).length;
 
+  console.log('📊 Estatísticas atuais:', unlockedAchievements + '/' + totalAchievements + ' conquistas desbloqueadas');
+
+  if (!isInitialized || achievements.length === 0) {
+    console.log('⏳ Aguardando inicialização do sistema de conquistas...');
+    return null;
+  }
+
   const value: AchievementContextType = {
     achievements,
     unlockAchievement,
+    updateProgress,
     incrementProgress,
     totalAchievements,
     unlockedAchievements
