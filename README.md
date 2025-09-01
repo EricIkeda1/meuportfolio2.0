@@ -34,7 +34,7 @@ Um portfólio moderno e responsivo desenvolvido em TypeScript e React, apresenta
 
 1. **Clone o repositório**
 ```
-git clone https://github.com/EricIkeda1/portfolio-typescript-react.git
+git clone https://github.com/EricIkeda1/meuportfolio2.0.git
 cd portfolio-typescript-react
 ```
 
