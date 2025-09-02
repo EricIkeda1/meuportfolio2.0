@@ -72,5 +72,15 @@ export const projectsData: Project[] = [
     tags: ["Dart", "Flutter", "Mobile", "Supabase API"],
     githubUrl: "https://github.com/EricIkeda1/Temperlights-Mobile.git",
     icon: "fas fa-mobile-alt"
+  },
+  {
+    id: 9,
+    title: "Portfólio Pessoal - Engenharia de Software 1.0",
+    year: "2024",
+    description: "Este portfólio foi desenvolvido para apresentar meus projetos e habilidades em engenharia de software, utilizando JavaScript, TypeScript, React e CSS.",
+    tags: ["JavaScript", "TypeScript", "CSS", "Vercel"],
+    externalUrl: "https://ericikedaportfolio.vercel.app/",
+    icon: "fas fa-laptop-code"
   }
 ];
+
