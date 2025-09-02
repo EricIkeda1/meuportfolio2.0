@@ -56,7 +56,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className={styles.footerInfo}>
-          <p>© {currentYear} Eric Ikeda. Todos os direitos reservados.</p>
+          <p>© {currentYear} Eric Yuji Ikeda. Todos os direitos reservados.</p>
           <p className={styles.madeWith}>Desenvolvido usando React + TypeScript</p>
         </div>
       </div>

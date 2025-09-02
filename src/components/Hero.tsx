@@ -5,7 +5,7 @@ const Hero: React.FC = () => {
   return (
     <section className={styles.hero} id="home">
       <div className="container">
-        <h1>Portfólio de Projetos TypeScript</h1>
+        <h1>Portfólio de Projetos de Eric Yuji Ikeda</h1>
         <div className="typescript-badge">
           <i className="fab fa-typescript"></i> TypeScript
         </div>
