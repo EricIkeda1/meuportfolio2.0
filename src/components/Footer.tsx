@@ -32,7 +32,7 @@ const Footer: React.FC = () => {
 
           <button 
             className={styles.socialLink}
-            onClick={() => handleLinkClick('https://www.linkedin.com/in/eric-ikeda/', 'visit_linkedin')}
+            onClick={() => handleLinkClick('https://www.linkedin.com/in/ericikeda1/', 'visit_linkedin')}
           >
             <i className="fab fa-linkedin"></i>
             <span className={styles.socialText}>LinkedIn</span>
