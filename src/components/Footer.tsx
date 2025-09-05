@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
           </button>
 
           <a 
-            href="mailto:seu-email@exemplo.com" 
+            href="" 
             className={styles.socialLink}
           >
             <i className="fas fa-envelope"></i>
